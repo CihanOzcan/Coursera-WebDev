@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  buildAndShowHomeHTML(allCategoriesUrl),
+  buildAndShowHomeHTML,
   //[...], // ***** <---- TODO: STEP 1: Substitute [...] ******
   true); // Explicitely setting the flag to get JSON from server processed into an object literal
 });
@@ -100,15 +100,12 @@ function buildAndShowHomeHTML (categories) {
       var chosenCategoryShortName =
         chooseRandomCategory(categories);
 
-        var finalHtml = homeHtml;
-        finalHtml += "<section class='row'>";
         var short_name = chosenCategoryShortName.short_name;
         var html = homeHtml;
         html = insertProperty(html,
                      "short_name",
                      short_name);
-        finalHtml += html;
-        homeHtmlToInsertIntoMainPage = finalHtml + "</section>";
+        homeHtmlToInsertIntoMainPage = html;
 
         insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
